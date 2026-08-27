@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Pagina imagen animada</title>
+<style>
+body {
+    text-align: center;
+}
+canvas {
+    border: 2px solid #5e5e5e;
+    background-color: rgb(31, 56, 141);
+}
+</style>
+<script>
+var canvas;
+var context;
+var x = 100;
+var y = 100;
+
+var dx = 2;
+var dy = 2;
+
+var ancho = 150;
+var alto = 150;
+
+var imagen = new Image();
+imagen.src = "cfish.png";
+var fondo = new Image();
+fondo.src = "fondop.jpg";
+
+function animate() {
+    requestAnimationFrame(animate);
+ 
+    context.clearRect(0, 0, canvas.width, canvas.height);
+   
+    context.drawImage(fondo, 0, 0, canvas.width, canvas.height);
+   
+    context.drawImage(imagen, x, y, ancho, alto);
+    
+    if (x + ancho >= canvas.width || x <= 0) {
+        dx = -dx;
+    }
+    if (y + alto >= canvas.height || y <= 0) {
+        dy = -dy;
+    }
+ 
+    x += dx;
+    y += dy;
+}
+function iniciar(){
+  canvas = document.getElementById("micanvas");
+  context = canvas.getContext("2d");
+  animate();
+}
+window.onload = iniciar;
+
+</script>
+</head>
+<body>
+<h1>Imagen animada</h1>
+<canvas id="micanvas" width="800" height="600"></canvas>
+<li><regresar><a href="../../index.html" target="_blank">Regresar</a></li>
+</body>
+</html>
